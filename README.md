@@ -1,4 +1,4 @@
-#Sorting Algorithms & Big 0
+# Sorting Algorithms & Big 0
 
 
 A **sorting algorithm** is one that takes an unordered list and returns it ordered. ... **Big-O**, along with **Big-Omega** and **Big-Theta**, describe the performance of an algorithm by estimating the number of operations required as the size of the input approaches infinity.
