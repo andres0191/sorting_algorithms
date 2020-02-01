@@ -14,19 +14,22 @@ void insertion_sort_list(listint_t **list)
 	{
 		val_idx = index->n;
 		val_idx_next = index->next->n;
-		/*printf("%d------%d\n", val_idx, val_idx_next);*/
+		printf("%d > %d\n", val_idx, val_idx_next);
 		if (val_idx > val_idx_next)
 		{
 			printf("entra al if\n");
 			aux_val = index;
-			while (val_idx_next > aux_val->n)
+			printf("aux_val = %d\n", aux_val->n);
+			while (val_idx_next < aux_val->n)
 			{
 				printf("entra al while\n");
 				cont++;
 				aux_val = aux_val->prev;
-				printf("val_idx [%d] y aux_val[%d] y contador [%d]\n", val_idx_next, aux_val->n, cont);
+				printf("val_idx_next=[%d] -  aux_val=[%d] -  contador=[%d]\n", val_idx_next, aux_val->n, cont);
 			}
+			cont--;
 			aux = index->next;
+			printf("donde esta parado mi index=[%d]\n", index->n);
 			aux_val = index;
 			/*printf("%d------%d\n", aux->n, aux_val->n);*/
 			for (; i <= cont; i++)
@@ -38,7 +41,7 @@ void insertion_sort_list(listint_t **list)
 				aux_val->prev = aux;
 				aux->next = aux_val;
 				aux_val = aux_val->prev;
-			/*	print_list(index);*/		
+				print_list(index);		
 			}
 		}
 		index = index->next;
