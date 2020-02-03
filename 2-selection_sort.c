@@ -13,25 +13,27 @@ void selection_sort(int *array, size_t size)
 
 	if (array == NULL || size <= 0)
 		return;
-
-	for (i = 0; i < (size - 2); i++)
+	if (size > 1)
 	{
-		idx = i;
-		for (j = i + 1; j < size; j++)
+		for (i = 0; i < (size - 2); i++)
 		{
-			if (array[j] < array[idx])
+			idx = i;
+			for (j = i + 1; j < size; j++)
 			{
-				idx = j;
-				flag = 1;
+				if (array[j] < array[idx])
+				{
+					idx = j;
+					flag = 1;
+				}
 			}
-		}
-		if (flag == 1)
-		{
-			aux = array[idx];
-			array[idx] = array[i];
-			array[i] = aux;
-			print_array(array, size);
-			flag = 0;
+			if (flag == 1)
+			{
+				aux = array[idx];
+				array[idx] = array[i];
+				array[i] = aux;
+				print_array(array, size);
+				flag = 0;
+			}
 		}
 	}
 }
