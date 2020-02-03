@@ -17,7 +17,7 @@ void insertion_sort_list(listint_t **list)
 		if (val_idx > val_idx_next)
 		{
 			aux_val = index;
-			printf("index donde esta parado=[%d]", aux_val->n);
+			/* printf("index donde esta parado=[%d]", aux_val->n); */
 			while (val_idx_next < aux_val->n && flag_cont != 1)
 			{
 				if (aux_val->prev == NULL)
@@ -26,7 +26,7 @@ void insertion_sort_list(listint_t **list)
 					{
 						cont++;
 						flag_cont = 1;
-						printf("entra al2do if y cont= [%d]\n", cont);
+						/* printf("entra al2do if y cont= [%d]\n", cont); */
 					}
 					else
 					{	
@@ -42,13 +42,14 @@ void insertion_sort_list(listint_t **list)
 			aux = index->next;
 			cont--;
 			aux_val = index;
+			printf("********Antes del Swap*********\naux : %d\naux_val: %d\nindex: %d\naux_val-prev: %d\nval_idx: %d\nval_idx_next: %d\n\n", aux->n, aux_val->n, index->n, aux_val->prev->n, val_idx, val_idx_next);
 			for (i = 0; i <= cont; i++)
 			{
-				//preguntar primero si aux_val->prev es null, si lo es, que le asigne el nulo
+				/* //preguntar primero si aux_val->prev es null, si lo es, que le asigne el nulo */
 				aux_val->prev->next = aux;
 				aux->next->prev = aux_val;
 				aux_val->next = aux->next;
-				//preguntar primero si aux_val->prev es null, si lo es, que le asigne el nulo
+				/* //preguntar primero si aux_val->prev es null, si lo es, que le asigne el nulo */
 				aux->prev = aux_val->prev;
 				aux_val->prev = aux;
 				aux->next = aux_val;
@@ -58,9 +59,10 @@ void insertion_sort_list(listint_t **list)
 				print_list(*list);
 				aux = aux->prev;
 				aux_val = aux_val->prev;
+				printf("-----Despues del Swap-----\naux : %d\naux_val: %d\nindex: %d\naux_val-prev: %d\nval_idx: %d\nval_idx_next: %d\n\n", aux->n, aux_val->n, index->n, aux_val->prev->n, val_idx, val_idx_next);
 
-				printf("aux->n: %d\n", aux->n);
-				printf("aux_val->n: %d\n", aux_val->n);
+/* 				printf("aux->n: %d\n", aux->n);
+				printf("aux_val->n: %d\n", aux_val->n); */
 				break;
 			}
 		}
