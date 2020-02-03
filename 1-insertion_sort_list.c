@@ -8,6 +8,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *index = (*list), *aux, *aux_val;
 	int val_idx_next = 0, i = 0, cont = 0, val_idx = 0, flag = 0;
+	int flag_cont = 0;
 
 	while (index->next)
 	{
@@ -16,10 +17,27 @@ void insertion_sort_list(listint_t **list)
 		if (val_idx > val_idx_next)
 		{
 			aux_val = index;
-			while (aux_val->prev && val_idx_next < aux_val->n)
+			printf("index donde esta parado=[%d]", aux_val->n);
+			while (val_idx_next < aux_val->n && flag_cont != 1)
 			{
-				cont++;
-				aux_val = aux_val->prev;
+				if (aux_val->prev == NULL)
+				{
+					if (aux_val->n > val_idx_next)
+					{
+						cont++;
+						flag_cont = 1;
+						printf("entra al2do if y cont= [%d]\n", cont);
+					}
+					else
+					{	
+						flag_cont = 1;
+					}
+				}
+				else
+				{
+					cont++;
+					aux_val = aux_val->prev;
+				}
 			}
 			aux = index->next;
 			cont--;
