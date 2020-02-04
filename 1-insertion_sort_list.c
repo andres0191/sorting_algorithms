@@ -57,41 +57,41 @@ void swap_first_node(listint_t *aux_2)
 
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *aux_1 = (*list)->next, *aux_2;
+	listint_t *aux_1, *aux_2;
 
-	aux_2 = aux_1;
-	while (aux_1 != NULL)
+	if (*list != NULL || list != NULL)
 	{
-		while (aux_2 != NULL)
-		{
-			if (aux_2->n > aux_1->n && aux_2->prev == NULL && aux_1->next == NULL)
-			{
-				swap_2_nodes(aux_2);
-				*list = aux_2->prev;
-				print_list(*list);
-			}
-			else if (aux_2->n > aux_1->n && aux_2->prev == NULL)
-			{
-				swap_first_node(aux_2);
-				*list = aux_2->prev;
-				print_list(*list);
-			}
-			else if (aux_2->n > aux_1->n && aux_2->prev != NULL)
-			{
-				if (aux_2->n > aux_1->n && aux_1->next == NULL)
-				{
-					swap_last_node(aux_2);
-					print_list(*list);
-				}
-				else
-				{
-					swap_nodes(aux_2);
-					print_list(*list);
-				}
-			}
-			aux_2 = aux_2->prev;
-		}
-		aux_1 = aux_1->next;
+		aux_1 = (*list)->next;
 		aux_2 = aux_1;
+		while (aux_1 != NULL)
+		{
+			while (aux_2 != NULL)
+			{
+				if (aux_2->n > aux_1->n && aux_2->prev == NULL && aux_1->next == NULL)
+				{
+					swap_2_nodes(aux_2);
+					*list = aux_2->prev;
+					print_list(*list);
+				}
+				else if (aux_2->n > aux_1->n && aux_2->prev == NULL)
+				{
+					swap_first_node(aux_2);
+					*list = aux_2->prev;
+					print_list(*list);
+				}
+				else if (aux_2->n > aux_1->n && aux_2->prev != NULL)
+				{
+					if (aux_2->n > aux_1->n && aux_1->next == NULL)
+					{
+						swap_last_node(aux_2);
+						print_list(*list); }
+					else
+					{swap_nodes(aux_2), print_list(*list); }
+				}
+				aux_2 = aux_2->prev;
+			}
+			aux_1 = aux_1->next;
+			aux_2 = aux_1;
+		}
 	}
 }
