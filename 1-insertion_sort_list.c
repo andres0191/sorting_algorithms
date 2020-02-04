@@ -59,7 +59,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *aux_1, *aux_2;
 
-	if (list != NULL || *list != NULL)
+	if (list != NULL && *list != NULL)
 	{
 		aux_1 = (*list)->next;
 		aux_2 = aux_1;
