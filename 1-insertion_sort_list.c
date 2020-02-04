@@ -1,74 +1,97 @@
 #include "sort.h"
 /**
+* swap_2_nodes - function for swan in two nodes
+* @aux_2: pointer of input
+**/
+void swap_2_nodes(listint_t *aux_2)
+{
+	aux_2->next->prev = NULL;
+	aux_2->prev = aux_2->next;
+	aux_2->next = NULL;
+	aux_2->prev->next = aux_2;
+}
+
+/**
+* swap_last_node - function that swaps the last node of the array
+* @aux_2: pointer to input
+**/
+void swap_last_node(listint_t *aux_2)
+{
+	aux_2->prev->next = aux_2->next;
+	aux_2->next->next = aux_2;
+	aux_2->next->prev = aux_2->prev;
+	aux_2->prev = aux_2->next;
+	aux_2->next = NULL;
+}
+
+/**
+ * swap_nodes - swaps two nodes form a double linked list
+ * @aux_2: pointer to the prevo=ious node
+ */
+void swap_nodes(listint_t *aux_2)
+{
+	aux_2->next->next->prev = aux_2;
+	aux_2->next->prev = aux_2->prev;
+	aux_2->prev = aux_2->next;
+	aux_2->next = aux_2->next->next;
+	aux_2->prev->prev->next = aux_2->prev;
+	aux_2->prev->next = aux_2;
+}
+/**
+* swap_first_node - swaps two nodes form a double linked list
+* @aux_2: pointer to the prevo=ious node
+*/
+void swap_first_node(listint_t *aux_2)
+{
+	aux_2->prev = aux_2->next;
+	aux_2->next->next->prev = aux_2;
+	aux_2->next = aux_2->next->next;
+	aux_2->prev->prev = NULL;
+	aux_2->prev->next = aux_2;
+}
+
+/**
  * insertion_sort_list - sorts a double linked list in ascending order
- * @**list: double linked list unsorted
- **/
+ * @list: double linked list unsorted
+ */
 
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *index = (*list), *aux, *aux_val;
-	int val_idx_next = 0, i = 0, cont = 0, val_idx = 0, flag = 0;
-	int flag_cont = 0;
+	listint_t *aux_1, *aux_2;
 
-	while (index->next)
+	if (list != NULL && *list != NULL)
 	{
-		val_idx = index->n;
-		val_idx_next = index->next->n;
-		if (val_idx > val_idx_next)
+		aux_1 = (*list)->next;
+		aux_2 = aux_1;
+		while (aux_1 != NULL)
 		{
-			aux_val = index;
-			/* printf("index donde esta parado=[%d]", aux_val->n); */
-			while (val_idx_next < aux_val->n && flag_cont != 1)
+			while (aux_2 != NULL)
 			{
-				if (aux_val->prev == NULL)
+				if (aux_2->n > aux_1->n && aux_2->prev == NULL && aux_1->next == NULL)
 				{
-					if (aux_val->n > val_idx_next)
+					swap_2_nodes(aux_2);
+					*list = aux_2->prev;
+					print_list(*list);
+				}
+				else if (aux_2->n > aux_1->n && aux_2->prev == NULL)
+				{
+					swap_first_node(aux_2);
+					*list = aux_2->prev;
+					print_list(*list);
+				}
+				else if (aux_2->n > aux_1->n && aux_2->prev != NULL)
+				{
+					if (aux_2->n > aux_1->n && aux_1->next == NULL)
 					{
-						cont++;
-						flag_cont = 1;
-						/* printf("entra al2do if y cont= [%d]\n", cont); */
-					}
+						swap_last_node(aux_2);
+						print_list(*list); }
 					else
-					{	
-						flag_cont = 1;
-					}
+					{swap_nodes(aux_2), print_list(*list); }
 				}
-				else
-				{
-					cont++;
-					aux_val = aux_val->prev;
-				}
+				aux_2 = aux_2->prev;
 			}
-			aux = index->next;
-			cont--;
-			aux_val = index;
-			printf("********Antes del Swap*********\naux : %d\naux_val: %d\nindex: %d\naux_val-prev: %d\nval_idx: %d\nval_idx_next: %d\n\n", aux->n, aux_val->n, index->n, aux_val->prev->n, val_idx, val_idx_next);
-			for (i = 0; i <= cont; i++)
-			{
-				/* //preguntar primero si aux_val->prev es null, si lo es, que le asigne el nulo */
-				aux_val->prev->next = aux;
-				aux->next->prev = aux_val;
-				aux_val->next = aux->next;
-				/* //preguntar primero si aux_val->prev es null, si lo es, que le asigne el nulo */
-				aux->prev = aux_val->prev;
-				aux_val->prev = aux;
-				aux->next = aux_val;
-				flag = 1;
-				while ((*list)->prev != NULL)
-					*list = (*list)->prev;
-				print_list(*list);
-				aux = aux->prev;
-				aux_val = aux_val->prev;
-				printf("-----Despues del Swap-----\naux : %d\naux_val: %d\nindex: %d\naux_val-prev: %d\nval_idx: %d\nval_idx_next: %d\n\n", aux->n, aux_val->n, index->n, aux_val->prev->n, val_idx, val_idx_next);
-
-/* 				printf("aux->n: %d\n", aux->n);
-				printf("aux_val->n: %d\n", aux_val->n); */
-				break;
-			}
+			aux_1 = aux_1->next;
+			aux_2 = aux_1;
 		}
-		if (flag == 0)
-			index = index->next;
-		else
-			flag = 0;
 	}
 }
