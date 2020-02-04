@@ -70,3 +70,15 @@ void quick_sort(int *array, size_t size)
 	}
 	}
 }
+    int pivot;
+    size_t i = 0;
+
+    pivot =  array;
+    if (size > 1)
+    {
+        for (i = 0; array[i] != NULL; i++)
+        {
+
+        }
+    }
+}
