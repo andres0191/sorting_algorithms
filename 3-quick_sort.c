@@ -19,21 +19,28 @@ void swap(int *a, int *b)
  *
  * Return: Always i + 1
  **/
-int partition(int *array, int low, int high)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high], i = (low - 1), j = 0;
+	int temp = 0;
 
 	for (j = low; j < high; j++)
 	{
 		if (array[j] <= pivot)
 		{
 			i++;
-			swap(array[i], array[j]);
+			temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+			print_array(array, size);
 		}
 	}
 	if (pivot < array[i + 1])
 	{
-		swap(array[i + 1], array[high]);
+		temp = array[i + 1];
+		array[i + 1] = array[high];
+		array[high] = temp;
+		print_array(array, size);
 	}
 	return (i + 1);
 }
@@ -46,11 +53,11 @@ int partition(int *array, int low, int high)
  **/
 void recurtion(int *array, int low, int high, size_t size)
 {
-	size_t i;
+	size_t i = 0;
 
 	if (low <= high)
 	{
-		i = partition(array, low, high);
+		i = partition(array, low, high, size);
 		if (i != size)
 			recurtion(array, i + 1, high, size);
 		if (i > 0)
