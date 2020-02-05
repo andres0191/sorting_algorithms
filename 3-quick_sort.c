@@ -1,16 +1,28 @@
 #include "sort.h"
 /**
- *
- *
- *
- *
- *
+ * swap - functiont that realize swap in the program
+ * @a: pointer of input
+ * @b: pointer of input
  **/
+void swap(int *a, int *b)
+{
+	int t = *a;
 
+	*a = *b;
+	*b = t;
+}
+/**
+ * partition - function thath realize partition the array
+ * @array: array of the input
+ * @low: size low of array
+ * @high: size high of array
+ *
+ * Return: Always i + 1
+ **/
 int partition(int *array, int low, int high)
 {
-	int pivot = array[high];
-	int i = (low - 1), j = 0, aux = 0;
+	int pivot = array[high], i = (low - 1), j = 0;
+
 	for (j = low; j < high; j++)
 	{
 		if (array[j] <= pivot)
@@ -19,66 +31,42 @@ int partition(int *array, int low, int high)
 			swap(array[i], array[j]);
 		}
 	}
-	swap(array[i + 1], array[high]);
+	if (pivot < array[i + 1])
+	{
+		swap(array[i + 1], array[high]);
+	}
 	return (i + 1);
 }
 /**
- *
- *
- *
- *
- *
- * */
-void quickSort(int array[], int low, int high)
+ * recurtion - function that execute recursion in the porject
+* @array: array of the input
+ * @low: size low of array
+ * @high: size high of array
+ * @size: size of array
+ **/
+void recurtion(int *array, int low, int high, size_t size)
 {
-	if (low < high)
+	size_t i;
+
+	if (low <= high)
 	{
-		int pi = partition(array, low, high);
-		quickSort(array, low, pi - 1);
-		quickSort(array, pi + 1, high);
+		i = partition(array, low, high);
+		if (i != size)
+			recurtion(array, i + 1, high, size);
+		if (i > 0)
+			recurtion(array, low, i - 1, size);
 	}
 }
 
-
-void swap(int *a, int *b)
-{
-  int t = *a;
-  *a = *b;
-  *b = t;
-}
-
 /**
-* quick_sort - sorts an array of integers in ascending order using the Quick sort algorithm
+* quick_sort - sorts an array of integers in ascending
 * @array: array of input for organice with quick_sort function
 * @size: size of array
 **/
 void quick_sort(int *array, size_t size)
 {
-	int pivot = 0, low = 0, high = 0;
-	size_t i = 0;
+	int low = 0, high = size - 1;
 
-	if (size < 0 || array == NULL)
-		return;
-	pivot =  array[size];
-	low = array[0];
-	high = array[size - 1],
-
-	if (size > 1)
-	{
-	for (i = 0; array[i] != NULL; i++)
-	{
-	}
-	}
-}
-    int pivot;
-    size_t i = 0;
-
-    pivot =  array;
-    if (size > 1)
-    {
-        for (i = 0; array[i] != NULL; i++)
-        {
-
-        }
-    }
+	if (array != NULL && size != 0)
+		recurtion(array, low, high, size);
 }
