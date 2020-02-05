@@ -9,7 +9,7 @@ void shell_sort(int *array, size_t size)
 	unsigned int div_array = 0, i = 0, j = 0;
 	int aux = 0;
 
-	for (div_array = size/2; div_array > 0; div_array /= 2)
+	for (div_array = (size / 2); div_array > 0; div_array /= 2)
 	{
 		for (i = div_array; i < size; i++)
 		{
